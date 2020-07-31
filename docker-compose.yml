@@ -1,0 +1,21 @@
+version: '3.8'
+services: 
+    
+    postgres:
+        image: 'postgres:12-alpine'
+        environment:
+            - POSTGRES_PASSWORD=postgres_password
+    
+    redis:
+        image: 'redis:latest'
+    
+    server:
+        build: 
+            dockerfile: Dockerfile.dev
+            context: ./server
+        volumes:
+            #no override for the node_modules folder
+            - /app/node_modules
+            - ./server:/app
+
+    
