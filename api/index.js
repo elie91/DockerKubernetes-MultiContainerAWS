@@ -18,8 +18,8 @@ const pgClient = new Pool({
     host: keys.pgHost
 });
 
-pgClient.on('connect', () => {
-    pgClient
+pgClient.connect((err, client, release) => {
+    client
       .query('CREATE TABLE IF NOT EXISTS values (number INT)')
       .catch((err) => console.log(err));
   });
