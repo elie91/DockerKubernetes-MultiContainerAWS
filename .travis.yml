@@ -19,3 +19,15 @@ after_success:
     - docker push elie91/multi-api
     - docker push elie91/multi-worker
     - docker push elie91/multi-nginx
+
+deploy: 
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "multi-docker"
+    env: "MultiDocker-env"
+    bucket_name: "elasticbeanstalk-us-east-2-537777817379"
+    bucket_path: "docker-multi"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
